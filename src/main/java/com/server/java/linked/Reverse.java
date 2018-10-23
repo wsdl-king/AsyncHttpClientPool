@@ -16,10 +16,8 @@ public class Reverse {
         ListNode node2 = listNode;
         while (node.next != null) {
             node = node.next;
-            ListNode next = listNode.next;
             node2.next = prev;
             prev = node2;
-            listNode = next;
             node2 = node;
         }
         ListNode listNode1 = new ListNode(node.val);
