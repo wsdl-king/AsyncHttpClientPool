@@ -23,7 +23,7 @@ public class ListNode {
                 newNode.next = null;
                 if (first == null) {
                     first = newNode;
-                    last = newNode;
+                    last = first;
                 } else {
                     last.next = newNode;
                     last = newNode;
