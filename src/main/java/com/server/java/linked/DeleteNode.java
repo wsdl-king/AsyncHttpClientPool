@@ -6,8 +6,6 @@ package com.server.java.linked;
  * @since 18-10-24 20:13 by jdk 1.8
  */
 public class DeleteNode {
-
-
     // 1-2-3-4-5 　假设我要删除倒数第二个节点.需要考虑边界
     private static ListNode deleteNode(ListNode node, int n) {
         //为空
@@ -20,7 +18,7 @@ public class DeleteNode {
         int deleteCount;
         int indexCount=0;
         ListNode  myNode = new ListNode(0);
-        ListNode valueNode=myNode;
+        myNode.next=node;
         ListNode deleteNode= node;
         ListNode current = node;
         while (current != null) {
@@ -36,28 +34,25 @@ public class DeleteNode {
         }
         //1-2-3-4-5  --- 要删除第4个
 
-         while(deleteNode!=null){
+         while(true){
              ++indexCount;
-             if(indexCount!=deleteCount){
+             if(deleteCount-indexCount>1){
                  //没有到规定的count
-                 myNode.next=deleteNode;
                  deleteNode=deleteNode.next;
-                 myNode=myNode.next;
-             }else{
+             }else if (indexCount+1==deleteCount){
                  //达到规定的count　我要进行删除
-                 deleteNode=deleteNode.next;
-                 myNode.next=deleteNode;
+                 deleteNode.next=deleteNode.next.next;
+                 break;
              }
-
          }
-         return valueNode.next;
+         return myNode.next;
     }
 
 
     public static void main(String[] args) {
-        int [] a = {1};
-        ListNode listNode =null;
-        ListNode listNode1 = deleteNode(listNode, 6);
+        int [] a = {1,2,3,4,5};
+        ListNode listNode =ListNode.buildListNode(a);
+        ListNode listNode1 = deleteNode(listNode, 2);
         System.out.println(listNode1);
     }
 
