@@ -1,5 +1,7 @@
 package com.server.java.linked;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * @author qiwenshuai
  * @note 　单链表中环的检测
@@ -12,33 +14,61 @@ package com.server.java.linked;
  * @since 18-10-25 13:39 by jdk 1.8
  */
 public class FindRing {
+
+    public static final Logger logger = LoggerFactory.getLogger(FindRing.class);
     /*
      *  1->2>3>4
      *      ↑  ↓
      *      6← 5
      */
-    private static Boolean findRing(ListNode node) {
+    //得到环的长度
+    private static ListNode findRing(ListNode node) {
         if (node == null) {
-            return false;
+            return null;
         }
+        int firstCount = 0;
+        int secondCount = 0;
+        ListNode currentNode;
+        ListNode head = node;
         ListNode slow = node;
         ListNode fast = node;
         while (fast != null && fast.next != null) {
+            ++firstCount;
             fast = fast.next.next;
             slow = slow.next;
             if (fast != null && fast.equals(slow)) {
-                return true;
+                //第一次环的长度
+                if (secondCount > 0) {
+                    logger.info("环的长度为:{}", firstCount - secondCount);
+                    logger.info("环的相交点为{}",head);
+                    return head;
+                }
+                //第一次相遇
+                secondCount = firstCount;
+                while (true) {
+                    currentNode = slow;
+                    while (!head.equals(slow) && slow != null) {
+                        slow = slow.next;
+                        head = head.next;
+                    }
+                    //head和slow相通
+                    //复位slow
+                    slow = currentNode;
+                    break;
+                }
+                logger.info("此链表包含环");
             }
         }
-        return  false;
+        logger.info("此链表不包含环");
+        return head;
     }
 
 
     public static void main(String[] args) {
         int[] a = {1, 2, 3, 4, 5, 6};
         ListNode listNode = ListNode.buildListNode(a);
-        ListNode cycleNode = ListNode.buildCycleNode(listNode, 2);
-        System.out.println(findRing(cycleNode));
+        ListNode cycleNode = ListNode.buildCycleNode(listNode, 3);
+        findRing(cycleNode);
         //进行环的检测
     }
 }
