@@ -16,9 +16,7 @@ public class FindMidListNode {
         ListNode fast = node;
         while ( fast!=null &&fast.next != null) {
             fast = fast.next.next;
-            ListNode next = node.next;
-            node=node.next;
-            slow = next;
+            slow = slow.next;
         }
 
         return slow;
@@ -26,9 +24,9 @@ public class FindMidListNode {
 
 
     public static void main(String[] args) {
-        int[] a = {1, 2, 3, 4, 6};
+        int[] a = {1, 2,4, 5,9,8,6};
         ListNode listNode = ListNode.buildListNode(a);
         ListNode midNode = findMidNode(listNode);
-        System.out.println(midNode);
+        System.out.println(midNode.val);
     }
 }

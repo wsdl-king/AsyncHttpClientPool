@@ -14,15 +14,15 @@ public class Reverse {
         ListNode prev = null;
         ListNode node = listNode;
         ListNode node2 = listNode;
-        while (node.next != null) {
+        while (node!= null) {
             node = node.next;
             node2.next = prev;
             prev = node2;
             node2 = node;
         }
-        ListNode listNode1 = new ListNode(node.val);
-        listNode1.next = prev;
-        return listNode1;
+//        ListNode listNode1 = new ListNode(node.val);
+//        listNode1.next = prev;
+        return prev;
     }
 
     public static void main(String[] args) {
