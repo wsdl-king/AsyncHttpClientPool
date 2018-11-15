@@ -2,7 +2,7 @@ package com.server.java.sort;
 
 /**
  * @author qiwenshuai
- * @note 写个归并排序
+ * @note 写个归并排序 0(nlogn)
  * @since 18-11-14 15:15 by jdk 1.8
  */
 public class MergerSort {

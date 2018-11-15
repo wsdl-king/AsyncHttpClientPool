@@ -21,18 +21,19 @@ public class QuickSort {
             while (i < j && a[i] <= key) {
                 i++;
             }
+
             if (i < j) {
-                int temp = a[j];
+                int temp = a[i];
                 a[i] = a[j];
                 a[j] = temp;
             }
         }
-
-        int tem = a[low];
+        int temp = a[low];
         a[low] = a[i];
-        a[i] = tem;
-        quickSort(a, low, i - 1);
+        a[i] = temp;
+        quickSort(a, low, i-1);
         quickSort(a, i + 1, high);
+
     }
 
 
