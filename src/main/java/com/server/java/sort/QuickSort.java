@@ -8,27 +8,33 @@ package com.server.java.sort;
  */
 public class QuickSort {
 
-    private static void quickSort(int[] a, int low, int high) {
-        if (low > high) {
+    private static void quickSort(int[] a, int begin, int end) {
+
+        if (begin > end) {
             return;
         }
-        int i = low;
-        int j = high;
-        int key = a[low];
-        while (i < j) {
-            while (i < j && a[j] > key) j--;
-            while (i < j && a[i] <= key) i++;
-            if (i < j) {
-                int temp = a[i];
-                a[i] = a[j];
-                a[j] = temp;
+        int low = begin;
+        int high = end;
+        int key = a[begin];
+        while (low < high) {
+            while (low < high && a[high] > key) {
+                high--;
             }
+            while (low < high && a[low] <= key) {
+                low++;
+            }
+            if (low < high) {
+                int temp = a[low];
+                a[low] = a[high];
+                a[high] = temp;
+            }
+
         }
-        int temp = a[low];
-        a[low] = a[i];
-        a[i] = temp;
-        quickSort(a,low,i-1);
-        quickSort(a,i+1,high);
+        int temp = a[begin];
+        a[begin] = a[low];
+        a[low] = temp;
+        quickSort(a,begin,low-1);
+        quickSort(a,low+1,end);
     }
 
 

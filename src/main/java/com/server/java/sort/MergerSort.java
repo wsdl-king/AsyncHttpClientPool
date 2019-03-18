@@ -1,5 +1,4 @@
 package com.server.java.sort;
-
 /**
  * @author qiwenshuai
  * @note 写个归并排序  时间0(nlogn) 空间0(n^2) 原地稳定排序算法
@@ -12,37 +11,36 @@ public class MergerSort {
         mergerSort(p, 0, p.length - 1);
     }
 
-
-    private static void mergerSort(int[] a, Integer p, Integer q) {
-        if (p >= q) return;
-        int mid = (p + q) >> 1;
-        mergerSort(a, p, mid);
-        mergerSort(a, mid + 1, q);
-        merge(a, p, mid, q);
+    private static void mergerSort(int[] a, Integer begin, Integer end) {
+        if (begin >= end) return;
+        int mid = (begin + end) >> 1;
+        mergerSort(a, begin, mid);
+        mergerSort(a, mid + 1, end);
+        merge(a, begin, mid, end);
     }
 
     //1,2,  3 6,4  2--4
-    private static void merge(int[] a, int low, int mid, int high) {
-        //创建临时数组low
-        int[] temp = new int[high - low + 1];
+    private static void merge(int[] a, int begin, int mid, int end) {
+        int[] temp = new int[end - begin + 1];
+        int m = begin;
+        int n = mid + 1;
         int k = 0;
-        int p = low;
-        int q = mid + 1;
-        while (p <= mid && q <= high) {
-            if (a[p] < a[q]) {
-                temp[k++] = a[p++];
+        while (m <= mid && n <= end) {
+            if (a[m] <= a[n]) {
+                temp[k++] = a[m++];
             } else {
-                temp[k++] = a[q++];
+                temp[k++] = a[n++];
             }
+
         }
-        while (p <= mid) {
-            temp[k++] = a[p++];
+        while (m <= mid) {
+            temp[k++] = a[m++];
         }
-        while (q <= high) {
-            temp[k++] = a[q++];
+        while (n <= end) {
+            temp[k++] = a[n++];
         }
-        for (int x = 0; x < temp.length; x++) {
-            a[low + x] =temp[x];
+        for (int i = 0; i < temp.length; i++) {
+            a[begin + i] = temp[i];
         }
     }
 
