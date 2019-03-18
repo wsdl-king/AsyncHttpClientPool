@@ -52,6 +52,7 @@ public class JobManager implements ApplicationRunner {
             Thread thread = new Thread(new JobRunner());
             thread.start();
         }
+
     }
 
 

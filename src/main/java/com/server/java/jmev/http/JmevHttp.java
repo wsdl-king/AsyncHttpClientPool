@@ -7,6 +7,7 @@ import com.server.java.jmev.security.SecretUtils;
 import com.server.java.util.config.ConfigUtils;
 import com.server.java.util.redis.RedisTool;
 import com.server.java.util.spring.SpringUtils;
+import com.server.scala.service.OnlineService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,6 +38,8 @@ public class JmevHttp {
 
     private static final RedisTool redisTool = SpringUtils.getBean("redisTool");
 
+    private static final OnlineService onlineService = SpringUtils.getBean("onlineService");
+
     private static void execute(String codesStr, String vin) throws Exception {
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-type", contentYpe);
@@ -49,7 +52,7 @@ public class JmevHttp {
         JSONObject jsonObjHead = new JSONObject();
         jsonObjHead.put("requestMsg", secConStr);
         jsonObjHead.put("sign", "");
-        JmevRealTime jmevRealTime = new JmevRealTime(redisTool, vin);
+        JmevRealTime jmevRealTime = new JmevRealTime(redisTool, vin,onlineService);
         httpAsyncPost(url, headers, jsonObjHead.toJSONString(), null, jmevRealTime);
     }
 
