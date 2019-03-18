@@ -15,7 +15,7 @@ public class ListNode {
     }
 
 
-    static ListNode buildListNode(int[] input) {
+    public static ListNode buildListNode(int[] input) {
         ListNode first = null, last = null, newNode;
         if (input.length > 0) {
             for (int anInput : input) {
@@ -35,7 +35,7 @@ public class ListNode {
 
     //给定指定的位置,然后创建一个环形链表。由尾部连接
     //1-2-3-4-5
-    protected static ListNode buildCycleNode(ListNode node, int n) {
+    public static ListNode buildCycleNode(ListNode node, int n) {
         //空链表校验
         if (node == null) {
             return null;
