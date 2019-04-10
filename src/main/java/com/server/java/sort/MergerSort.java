@@ -1,4 +1,5 @@
 package com.server.java.sort;
+
 /**
  * @author qiwenshuai
  * @note 写个归并排序  时间0(nlogn) 空间0(n^2) 原地稳定排序算法
@@ -21,26 +22,25 @@ public class MergerSort {
 
     //1,2,  3 6,4  2--4
     private static void merge(int[] a, int begin, int mid, int end) {
-        int[] temp = new int[end - begin + 1];
-        int m = begin;
-        int n = mid + 1;
-        int k = 0;
-        while (m <= mid && n <= end) {
-            if (a[m] <= a[n]) {
-                temp[k++] = a[m++];
-            } else {
-                temp[k++] = a[n++];
+        int low=begin;
+        int high=mid+1;
+        int k=0;
+        int [] temp=new int[end-begin+1];
+        while (low<=mid && high<=end){
+            if (a[low]<=a[high]){
+                temp[k++]=a[low++];
+            }else{
+                temp[k++]=a[high++];
             }
-
         }
-        while (m <= mid) {
-            temp[k++] = a[m++];
+        while (low<=mid){
+            temp[k++]=a[low++];
         }
-        while (n <= end) {
-            temp[k++] = a[n++];
+        while ( high<=end){
+            temp[k++]=a[high++];
         }
-        for (int i = 0; i < temp.length; i++) {
-            a[begin + i] = temp[i];
+        for (int i=0;i<temp.length;i++){
+            a[begin+i]=temp[i];
         }
     }
 

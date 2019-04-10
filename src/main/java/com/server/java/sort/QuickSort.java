@@ -7,32 +7,25 @@ package com.server.java.sort;
  * @since 18-11-13 14:06 by jdk 1.8
  */
 public class QuickSort {
-
     private static void quickSort(int[] a, int begin, int end) {
-
-        if (begin > end) {
+        if(begin>end){
             return;
         }
-        int low = begin;
-        int high = end;
-        int key = a[begin];
-        while (low < high) {
-            while (low < high && a[high] > key) {
-                high--;
+        int low= begin;
+        int key=a[begin];
+        int high=end;
+        while (low<high){
+            while (low<high && a[high]>key) high--;
+            while (low<high && a[low]<=key) low++;
+            if(low<high){
+                int temp=a[low];
+                a[low]=a[high];
+                a[high]=temp;
             }
-            while (low < high && a[low] <= key) {
-                low++;
-            }
-            if (low < high) {
-                int temp = a[low];
-                a[low] = a[high];
-                a[high] = temp;
-            }
-
         }
-        int temp = a[begin];
-        a[begin] = a[low];
-        a[low] = temp;
+        int temp =a[begin];
+        a[begin]=a[low];
+        a[low]=temp;
         quickSort(a,begin,low-1);
         quickSort(a,low+1,end);
     }
